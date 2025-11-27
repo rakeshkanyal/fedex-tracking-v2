@@ -75,19 +75,13 @@ if (isset($_GET['stream']) && $_GET['stream'] === '1') {
     exit;
 }
 
+// Set page title
+$pageTitle = 'Processing - FedEx Tracker';
+
 // Regular page view - show processing UI
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Processing - FedEx Tracker</title>
-    <link rel="stylesheet" href="css/common.css">
-</head>
-<body>
-    <?php include 'includes/header.php'; ?>
-    <?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
     
     <main class="main-content">
         <div class="content-container">
@@ -210,7 +204,3 @@ if (isset($_GET['stream']) && $_GET['stream'] === '1') {
             </script>
             
             <?php include 'includes/footer.php'; ?>
-        </div>
-    </main>
-</body>
-</html>

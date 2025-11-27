@@ -74,18 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Get error message if any
 $error = $_SESSION['error'] ?? null;
 unset($_SESSION['error']);
+
+// Set page title
+$pageTitle = 'Tracking & POD - FedEx Tracker';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracking & POD - FedEx Tracker</title>
-    <link rel="stylesheet" href="css/common.css">
-</head>
-<body>
-    <?php include 'includes/header.php'; ?>
-    <?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
     
     <main class="main-content">
         <div class="content-container">
@@ -168,7 +162,3 @@ unset($_SESSION['error']);
             </div>
             
             <?php include 'includes/footer.php'; ?>
-        </div>
-    </main>
-</body>
-</html>

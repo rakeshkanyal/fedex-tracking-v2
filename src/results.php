@@ -34,18 +34,12 @@ $projectNumber = $results['projectNumber'] ?? 'Unknown';
 // Get file names
 $excelFileName = $excelFile ? basename($excelFile) : null;
 $mergedPdfFileName = $mergedPdf ? basename($mergedPdf) : null;
+
+// Set page title
+$pageTitle = 'Results - FedEx Tracker';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Results - FedEx Tracker</title>
-    <link rel="stylesheet" href="css/common.css">
-</head>
-<body>
-    <?php include 'includes/header.php'; ?>
-    <?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
     
     <main class="main-content">
         <div class="content-container">
@@ -132,7 +126,3 @@ $mergedPdfFileName = $mergedPdf ? basename($mergedPdf) : null;
             </div>
             
             <?php include 'includes/footer.php'; ?>
-        </div>
-    </main>
-</body>
-</html>

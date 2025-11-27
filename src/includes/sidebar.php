@@ -31,6 +31,17 @@
             </a>
         </div>
 
+        <!-- Coming Soon Features -->
+        <div class="nav-section">
+            <div class="nav-section-title">Coming Soon</div>
+            <a href="#" class="nav-item" style="opacity: 0.5; cursor: not-allowed;">
+                <span class="nav-item-icon">📝</span>
+                <span class="nav-item-text">Shipping Label</span>
+                <span class="nav-badge">Soon</span>
+            </a>
+
+        </div>
+
         <!-- Tools & Settings -->
         <div class="nav-section">
             <div class="nav-section-title">Tools</div>
