@@ -80,90 +80,95 @@ unset($_SESSION['error']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FedEx Tracking & POD Downloader</title>
-    <link rel="stylesheet" href="css/base.css">
+    <title>Tracking & POD - FedEx Tracker</title>
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🚚 FedEx Tracking & POD Downloader</h1>
-        <p class="subtitle">Upload Excel files with tracking numbers to check status and download PODs</p>
-        
-        <!-- Navigation to Address Validation -->
-        <div style="margin-bottom: 20px; text-align: right;">
-            <a href="address-validation.php" style="display: inline-block; padding: 10px 20px; background: #4caf50; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
-                📍 Address Validation
-            </a>
-        </div>
-        
-        <?php if ($error): ?>
-            <div class="message error"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
+    <?php include 'includes/header.php'; ?>
+    <?php include 'includes/sidebar.php'; ?>
+    
+    <main class="main-content">
+        <div class="content-container">
+            <div class="page-header">
+                <h2 class="page-title">
+                    <span>📦</span>
+                    <span>Tracking & POD Downloader</span>
+                </h2>
+                <p class="page-subtitle">Upload Excel files with tracking numbers to check status and download PODs</p>
+            </div>
+            
+            <?php if ($error): ?>
+                <div class="message error"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
 
-        <div class="upload-section">
-            <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
-                <div style="margin-bottom: 20px;">
-                    <label for="projectNumber" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">
-                        Project Number: <span style="color: red;">*</span>
-                    </label>
-                    <input 
-                        type="text" 
-                        name="project_number" 
-                        id="projectNumber"
-                        maxlength="10"
-                        required
-                        style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;"
-                        placeholder="Enter project number (max 10 characters)"
-                    >
-                    <small style="display: block; margin-top: 5px; color: #666;">
-                        Used for naming output files
-                    </small>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <label for="shipmentDate" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">
-                        Shipment Date (Optional):
-                    </label>
-                    <input 
-                        type="date" 
-                        name="shipment_date" 
-                        id="shipmentDate"
-                        style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;"
-                    >
-                    <small style="display: block; margin-top: 5px; color: #666;">
-                        Leave blank to search without date filter
-                    </small>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <label for="files" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">
-                        Excel Files: <span style="color: red;">*</span>
-                    </label>
-                    <input 
-                        type="file" 
-                        name="files[]" 
-                        id="files"
-                        multiple 
-                        required 
-                        accept=".xlsx,.xls"
-                        style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px;"
-                    >
-                </div>
-                
-                <button type="submit" style="width: 100%;">📤 Upload & Process</button>
-            </form>
-        </div>
+            <div class="form-section">
+                <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
+                    <div class="form-group">
+                        <label for="projectNumber" class="form-label">
+                            Project Number: <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="project_number" 
+                            id="projectNumber"
+                            maxlength="10"
+                            required
+                            class="form-input"
+                            placeholder="Enter project number (max 10 characters)"
+                        >
+                        <small class="form-help">
+                            Used for naming output files
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="shipmentDate" class="form-label">
+                            Shipment Date (Optional):
+                        </label>
+                        <input 
+                            type="date" 
+                            name="shipment_date" 
+                            id="shipmentDate"
+                            class="form-input"
+                        >
+                        <small class="form-help">
+                            Leave blank to search without date filter
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="files" class="form-label">
+                            Excel Files: <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="file" 
+                            name="files[]" 
+                            id="files"
+                            multiple 
+                            required 
+                            accept=".xlsx,.xls"
+                            class="form-input"
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">📤 Upload & Process</button>
+                </form>
+            </div>
 
-        <div style="margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
-            <h3 style="margin-top: 0;">Instructions:</h3>
-            <ul style="line-height: 1.8;">
-                <li><strong>Project Number:</strong> Enter a unique identifier for this batch (max 10 characters) - <span style="color: red;">Required</span></li>
-                <li><strong>Shipment Date:</strong> Optional - Filter PODs by specific shipment date</li>
-                <li><strong>Excel Files:</strong> Upload one or more Excel files (.xlsx or .xls)</li>
-                <li>Each file must contain a column named "Tracking Number" or "Tracking"</li>
-                <li>Files will be combined and processed together</li>
-                <li>Output files will be named: <code>[ProjectNumber]-Tracking.xlsx</code> and <code>[ProjectNumber]-POD.pdf</code></li>
-            </ul>
+            <div class="info-box">
+                <h3>Instructions:</h3>
+                <ul>
+                    <li><strong>Project Number:</strong> Enter a unique identifier for this batch (max 10 characters) - <span style="color: red;">Required</span></li>
+                    <li><strong>Shipment Date:</strong> Optional - Filter PODs by specific shipment date</li>
+                    <li><strong>Excel Files:</strong> Upload one or more Excel files (.xlsx or .xls)</li>
+                    <li>Each file must contain a column named "Tracking Number" or "Tracking"</li>
+                    <li>Files will be combined and processed together</li>
+                    <li>Output files will be named: <code>[ProjectNumber]-Tracking.xlsx</code> and <code>[ProjectNumber]-POD.pdf</code></li>
+                </ul>
+            </div>
+            
+            <?php include 'includes/footer.php'; ?>
         </div>
-    </div>
+    </main>
 </body>
 </html>

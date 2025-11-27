@@ -77,78 +77,84 @@ unset($_SESSION['error']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FedEx Address Validation</title>
-    <link rel="stylesheet" href="css/base.css">
+    <title>Address Validation - FedEx Tracker</title>
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🚚 FedEx Address Validation</h1>
-        <p class="subtitle">Upload CSV files to validate FedEx delivery addresses</p>
-        
-        <?php if ($error): ?>
-            <div class="message error"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
+    <?php include 'includes/header.php'; ?>
+    <?php include 'includes/sidebar.php'; ?>
+    
+    <main class="main-content">
+        <div class="content-container">
+            <div class="page-header">
+                <h2 class="page-title">
+                    <span>📍</span>
+                    <span>FedEx Address Validation</span>
+                </h2>
+                <p class="page-subtitle">Upload CSV files to validate FedEx delivery addresses</p>
+            </div>
+            
+            <?php if ($error): ?>
+                <div class="message error"><?= htmlspecialchars($error) ?></div>
+            <?php endif; ?>
 
-        <div class="upload-section">
-            <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
-                <div style="margin-bottom: 20px;">
-                    <label for="projectNumber" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">
-                        Project Number: <span style="color: red;">*</span>
-                    </label>
-                    <input 
-                        type="text" 
-                        name="project_number" 
-                        id="projectNumber"
-                        maxlength="10"
-                        required
-                        style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; font-size: 16px;"
-                        placeholder="Enter project number (max 10 characters)"
-                    >
-                    <small style="display: block; margin-top: 5px; color: #666;">
-                        Used for naming output files
-                    </small>
-                </div>
-                
-                <div style="margin-bottom: 20px;">
-                    <label for="files" style="display: block; margin-bottom: 8px; font-weight: bold; color: #333;">
-                        CSV File: <span style="color: red;">*</span>
-                    </label>
-                    <input 
-                        type="file" 
-                        name="files[]" 
-                        id="files"
-                        required 
-                        accept=".csv"
-                        style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px;"
-                    >
-                </div>
-                
-                <button type="submit" style="width: 100%;">📤 Upload & Validate</button>
-            </form>
-        </div>
+            <div class="form-section">
+                <form action="" method="POST" enctype="multipart/form-data" id="uploadForm">
+                    <div class="form-group">
+                        <label for="projectNumber" class="form-label">
+                            Project Number: <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="project_number" 
+                            id="projectNumber"
+                            maxlength="10"
+                            required
+                            class="form-input"
+                            placeholder="Enter project number (max 10 characters)"
+                        >
+                        <small class="form-help">
+                            Used for naming output files
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="files" class="form-label">
+                            CSV File: <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="file" 
+                            name="files[]" 
+                            id="files"
+                            required 
+                            accept=".csv"
+                            class="form-input"
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-block">📤 Upload & Validate</button>
+                </form>
+            </div>
 
-        <div style="margin-top: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px;">
-            <h3 style="margin-top: 0;">Instructions:</h3>
-            <ul style="line-height: 1.8;">
-                <li><strong>Project Number:</strong> Enter a unique identifier for this batch (max 10 characters) - <span style="color: red;">Required</span></li>
-                <li><strong>CSV File:</strong> Upload a CSV file with the following columns:</li>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>SAP_ID, ATTN, Company, Add1, Add2, Add3, City, St, Zip</li>
+            <div class="info-box">
+                <h3>Instructions:</h3>
+                <ul>
+                    <li><strong>Project Number:</strong> Enter a unique identifier for this batch (max 10 characters) - <span style="color: red;">Required</span></li>
+                    <li><strong>CSV File:</strong> Upload a CSV file with the following columns:</li>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>SAP_ID, ATTN, Company, Add1, Add2, Add3, City, St, Zip</li>
+                    </ul>
+                    <li>The system will validate each address with FedEx</li>
+                    <li>Output: Two files will be generated:</li>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li><strong>📦 FedEx-ListResult.csv</strong> - Addresses deliverable via FedEx</li>
+                        <li><strong>📬 USPS-ListResult.csv</strong> - Addresses to ship via USPS instead</li>
+                    </ul>
                 </ul>
-                <li>The system will validate each address with FedEx</li>
-                <li>Output: Two files will be generated:</li>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li><strong>📦 FedEx-ListResult.csv</strong> - Addresses deliverable via FedEx</li>
-                    <li><strong>📬 USPS-ListResult.csv</strong> - Addresses to ship via USPS instead</li>
-                </ul>
-            </ul>
+            </div>
+            
+            <?php include 'includes/footer.php'; ?>
         </div>
-
-        <div style="margin-top: 20px; text-align: center;">
-            <a href="index.php" style="display: inline-block; padding: 12px 30px; background: #2196F3; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
-                ← Back to Tracking
-            </a>
-        </div>
-    </div>
+    </main>
 </body>
 </html>

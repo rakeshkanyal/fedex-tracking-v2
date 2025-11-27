@@ -83,122 +83,134 @@ if (isset($_GET['stream']) && $_GET['stream'] === '1') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Processing - FedEx Tracker</title>
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/common.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🚚 FedEx Tracking & POD Downloader</h1>
-        <p class="subtitle">Processing your tracking numbers...</p>
+    <?php include 'includes/header.php'; ?>
+    <?php include 'includes/sidebar.php'; ?>
+    
+    <main class="main-content">
+        <div class="content-container">
+            <div class="page-header">
+                <h2 class="page-title">
+                    <span>⚙️</span>
+                    <span>Processing Tracking Numbers</span>
+                </h2>
+                <p class="page-subtitle">Please wait while we process your tracking information...</p>
+            </div>
 
-        <div class="progress-section" id="progressSection">
-            <div class="progress-header">
-                <div class="spinner"></div>
-                <h2 style="border: none; margin: 0; padding: 0;">Processing...</h2>
-            </div>
-            
-            <div class="progress-bar-container">
-                <div class="progress-bar" id="progressBar">0%</div>
-            </div>
-            
-            <div class="status-log" id="statusLog">
-                <div class="status-item info">
-                    <span class="time">--:--:--</span>
-                    <span>Initializing...</span>
+            <div class="progress-section" id="progressSection">
+                <div class="progress-header">
+                    <div class="spinner"></div>
+                    <h3 style="border: none; margin: 0; padding: 0;">Processing...</h3>
+                </div>
+                
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar">0%</div>
+                </div>
+                
+                <div class="status-log" id="statusLog">
+                    <div class="status-item info">
+                        <span class="time">--:--:--</span>
+                        <span>Initializing...</span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <script>
-            // Server-Sent Events for real-time status updates
-            const eventSource = new EventSource('process.php?stream=1');
-            const statusLog = document.getElementById('statusLog');
-            const progressBar = document.getElementById('progressBar');
-            const progressSection = document.getElementById('progressSection');
-            
-            let hasCompleted = false;
-            
-            // Clear initial placeholder
-            statusLog.innerHTML = '';
-            
-            eventSource.addEventListener('status', function(e) {
-                const data = JSON.parse(e.data);
+            <script>
+                // Server-Sent Events for real-time status updates
+                const eventSource = new EventSource('process.php?stream=1');
+                const statusLog = document.getElementById('statusLog');
+                const progressBar = document.getElementById('progressBar');
+                const progressSection = document.getElementById('progressSection');
                 
-                // Add status message to log
-                const statusItem = document.createElement('div');
-                statusItem.className = `status-item ${data.type}`;
-                statusItem.innerHTML = `
-                    <span class="time">${data.timestamp}</span>
-                    <span>${data.message}</span>
-                `;
-                statusLog.appendChild(statusItem);
-                statusLog.scrollTop = statusLog.scrollHeight;
+                let hasCompleted = false;
                 
-                // Update progress bar
-                if (data.progress !== null && data.progress !== undefined) {
-                    progressBar.style.width = data.progress + '%';
-                    progressBar.textContent = data.progress + '%';
-                }
-            });
-            
-            eventSource.addEventListener('complete', function(e) {
-                if (hasCompleted) return;
-                hasCompleted = true;
+                // Clear initial placeholder
+                statusLog.innerHTML = '';
                 
-                const data = JSON.parse(e.data);
-                eventSource.close();
-                
-                if (data.success) {
-                    const successItem = document.createElement('div');
-                    successItem.className = 'status-item success';
-                    successItem.innerHTML = `
-                        <span class="time">${new Date().toLocaleTimeString('en-US', {hour12: false})}</span>
-                        <span>🎉 All done! Redirecting to results...</span>
+                eventSource.addEventListener('status', function(e) {
+                    const data = JSON.parse(e.data);
+                    
+                    // Add status message to log
+                    const statusItem = document.createElement('div');
+                    statusItem.className = `status-item ${data.type}`;
+                    statusItem.innerHTML = `
+                        <span class="time">${data.timestamp}</span>
+                        <span>${data.message}</span>
                     `;
-                    statusLog.appendChild(successItem);
+                    statusLog.appendChild(statusItem);
                     statusLog.scrollTop = statusLog.scrollHeight;
                     
-                    setTimeout(() => {
-                        window.location.href = 'results.php';
-                    }, 2000);
-                } else {
+                    // Update progress bar
+                    if (data.progress !== null && data.progress !== undefined) {
+                        progressBar.style.width = data.progress + '%';
+                        progressBar.textContent = data.progress + '%';
+                    }
+                });
+                
+                eventSource.addEventListener('complete', function(e) {
+                    if (hasCompleted) return;
+                    hasCompleted = true;
+                    
+                    const data = JSON.parse(e.data);
+                    eventSource.close();
+                    
+                    if (data.success) {
+                        const successItem = document.createElement('div');
+                        successItem.className = 'status-item success';
+                        successItem.innerHTML = `
+                            <span class="time">${new Date().toLocaleTimeString('en-US', {hour12: false})}</span>
+                            <span>🎉 All done! Redirecting to results...</span>
+                        `;
+                        statusLog.appendChild(successItem);
+                        statusLog.scrollTop = statusLog.scrollHeight;
+                        
+                        setTimeout(() => {
+                            window.location.href = 'results.php';
+                        }, 2000);
+                    } else {
+                        const errorItem = document.createElement('div');
+                        errorItem.className = 'status-item error';
+                        errorItem.innerHTML = `
+                            <span class="time">${new Date().toLocaleTimeString('en-US', {hour12: false})}</span>
+                            <span>✗ Processing failed: ${data.error || 'Unknown error'}</span>
+                        `;
+                        statusLog.appendChild(errorItem);
+                        statusLog.scrollTop = statusLog.scrollHeight;
+                        
+                        const spinner = progressSection.querySelector('.spinner');
+                        if (spinner) spinner.style.display = 'none';
+                        
+                        setTimeout(() => {
+                            window.location.href = 'index.php';
+                        }, 3000);
+                    }
+                });
+                
+                eventSource.onerror = function(e) {
+                    if (hasCompleted) return;
+                    
+                    console.error('EventSource error:', e);
+                    eventSource.close();
+                    
                     const errorItem = document.createElement('div');
                     errorItem.className = 'status-item error';
                     errorItem.innerHTML = `
                         <span class="time">${new Date().toLocaleTimeString('en-US', {hour12: false})}</span>
-                        <span>✗ Processing failed: ${data.error || 'Unknown error'}</span>
+                        <span>✗ Connection error. Redirecting...</span>
                     `;
                     statusLog.appendChild(errorItem);
                     statusLog.scrollTop = statusLog.scrollHeight;
                     
-                    const spinner = progressSection.querySelector('.spinner');
-                    if (spinner) spinner.style.display = 'none';
-                    
                     setTimeout(() => {
                         window.location.href = 'index.php';
                     }, 3000);
-                }
-            });
+                };
+            </script>
             
-            eventSource.onerror = function(e) {
-                if (hasCompleted) return;
-                
-                console.error('EventSource error:', e);
-                eventSource.close();
-                
-                const errorItem = document.createElement('div');
-                errorItem.className = 'status-item error';
-                errorItem.innerHTML = `
-                    <span class="time">${new Date().toLocaleTimeString('en-US', {hour12: false})}</span>
-                    <span>✗ Connection error. Redirecting...</span>
-                `;
-                statusLog.appendChild(errorItem);
-                statusLog.scrollTop = statusLog.scrollHeight;
-                
-                setTimeout(() => {
-                    window.location.href = 'index.php';
-                }, 3000);
-            };
-        </script>
-    </div>
+            <?php include 'includes/footer.php'; ?>
+        </div>
+    </main>
 </body>
 </html>
