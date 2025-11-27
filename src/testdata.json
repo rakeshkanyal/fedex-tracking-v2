@@ -1,0 +1,326 @@
+//Passed - Fedex Delivery possible
+{
+    "transactionId": "e498173d-1b45-4990-aea2-958a17ee9633",
+    "output": {
+        "resolvedAddresses": [
+            {
+                "streetLinesToken": [
+                    "1046 6TH AVE SW"
+                ],
+                "city": "ALBANY",
+                "stateOrProvinceCode": "OR",
+                "postalCode": "97321-1916",
+                "parsedPostalCode": {
+                    "base": "97321",
+                    "addOn": "1916",
+                    "deliveryPoint": "46"
+                },
+                "countryCode": "US",
+                "classification": "BUSINESS",
+                "ruralRouteHighwayContract": false,
+                "generalDelivery": false,
+                "customerMessages": [],
+                "normalizedStatusNameDPV": true,
+                "standardizedStatusNameMatchSource": "Postal",
+                "resolutionMethodName": "USPS_VALIDATE",
+                "attributes": {
+                    "POBox": "false",
+                    "POBoxOnlyZIP": "false",
+                    "SplitZIP": "false",
+                    "SuiteRequiredButMissing": "false",
+                    "InvalidSuiteNumber": "false",
+                    "ResolutionInput": "RAW_ADDRESS",
+                    "DPV": "true",
+                    "ResolutionMethod": "USPS_VALIDATE",
+                    "DataVintage": "December 2023",
+                    "MatchSource": "Postal",
+                    "CountrySupported": "true",
+                    "ValidlyFormed": "true",
+                    "Matched": "true",
+                    "Resolved": "true",
+                    "Inserted": "false",
+                    "MultiUnitBase": "false",
+                    "ZIP11Match": "true",
+                    "ZIP4Match": "true",
+                    "UniqueZIP": "false",
+                    "StreetAddress": "true",
+                    "RRConversion": "false",
+                    "ValidMultiUnit": "false",
+                    "AddressType": "STANDARDIZED",
+                    "AddressPrecision": "STREET_ADDRESS",
+                    "MultipleMatches": "false"
+                }
+            }
+        ]
+    }
+}
+
+/*failed - will send through USPS*/
+{
+  "transactionId": "86dd32b3-b6ef-42e7-aeb8-87dd4fb626a1",
+  "output": {
+    "resolvedAddresses": [
+      {
+        "streetLinesToken": ["INSTITUTO MEDICO DEL NORTE INC"],
+        "city": "VEGA BAJA",
+        "stateOrProvinceCode": "PR",
+        "postalCode": "693",
+        "countryCode": "US",
+        "classification": "UNKNOWN",
+        "ruralRouteHighwayContract": false,
+        "generalDelivery": false,
+        "customerMessages": [
+          {
+            "code": "STANDARDIZED.ADDRESS.NOTFOUND",
+            "message": "Standardized address is not found."
+          }
+        ],
+        "attributes": {
+          "SuiteRequiredButMissing": "false",
+          "PostalValidated": "false",
+          "InvalidSuiteNumber": "false",
+          "ZIP11Match": "false",
+          "GeneralDelivery": "false",
+          "DPV": "false",
+          "DataVintage": "October 2025",
+          "ZIP4Match": "false",
+          "CityStateValidated": "true",
+          "CountrySupported": "true",
+          "ValidlyFormed": "false",
+          "Matched": "false",
+          "StreetValidated": "false",
+          "MissingOrAmbiguousDirectional": "false",
+          "Resolved": "false",
+          "StreetRangeValidated": "false",
+          "AddressType": "NORMALIZED",
+          "Inserted": "true",
+          "MultipleMatches": "false"
+        }
+      }
+    ]
+  }
+}
+
+
+/* Failed because I entered city DEDEDO in request it  changed it tp YIGO */
+{
+    "transactionId": "b1011169-aad7-4601-857d-ba4390fda2ec",
+    "output": {
+        "resolvedAddresses": [
+            {
+                "streetLinesToken": [
+                    "133 ROUTE 3"
+                ],
+                "city": "YIGO",
+                "stateOrProvinceCode": "GU",
+                "postalCode": "96929-6911",
+                "parsedPostalCode": {
+                    "base": "96929",
+                    "addOn": "6911",
+                    "deliveryPoint": "33"
+                },
+                "countryCode": "US",
+                "classification": "BUSINESS",
+                "ruralRouteHighwayContract": false,
+                "generalDelivery": false,
+                "customerMessages": [],
+                "normalizedStatusNameDPV": true,
+                "standardizedStatusNameMatchSource": "Postal",
+                "resolutionMethodName": "USPS_VALIDATE",
+                "attributes": {
+                    "POBox": "false",
+                    "POBoxOnlyZIP": "false",
+                    "SplitZIP": "false",
+                    "SuiteRequiredButMissing": "false",
+                    "InvalidSuiteNumber": "false",
+                    "ResolutionInput": "RAW_ADDRESS",
+                    "DPV": "true",
+                    "ResolutionMethod": "USPS_VALIDATE",
+                    "DataVintage": "January 2017",
+                    "MatchSource": "Postal",
+                    "CountrySupported": "true",
+                    "ValidlyFormed": "true",
+                    "Matched": "true",
+                    "Resolved": "true",
+                    "Inserted": "false",
+                    "MultiUnitBase": "false",
+                    "ZIP11Match": "true",
+                    "ZIP4Match": "true",
+                    "UniqueZIP": "false",
+                    "StreetAddress": "true",
+                    "RRConversion": "false",
+                    "ValidMultiUnit": "false",
+                    "AddressType": "STANDARDIZED",
+                    "AddressPrecision": "STREET_ADDRESS",
+                    "MultipleMatches": "false"
+                }
+            }
+        ]
+    }
+}
+
+// Failed as it changed the city - In request it was MARGATE
+
+{
+    "transactionId": "26e3b903-87db-4379-a49e-24ba95ddc57e",
+    "output": {
+        "resolvedAddresses": [
+            {
+                "streetLinesToken": [
+                    "2801 N STATE ROAD 7"
+                ],
+                "city": "POMPANO BEACH",
+                "stateOrProvinceCode": "FL",
+                "postalCode": "33063-5727",
+                "parsedPostalCode": {
+                    "base": "33063",
+                    "addOn": "5727",
+                    "deliveryPoint": "01"
+                },
+                "countryCode": "US",
+                "classification": "BUSINESS",
+                "ruralRouteHighwayContract": false,
+                "generalDelivery": false,
+                "customerMessages": [],
+                "normalizedStatusNameDPV": true,
+                "standardizedStatusNameMatchSource": "Postal",
+                "resolutionMethodName": "USPS_VALIDATE",
+                "attributes": {
+                    "POBox": "false",
+                    "POBoxOnlyZIP": "false",
+                    "SplitZIP": "false",
+                    "SuiteRequiredButMissing": "false",
+                    "InvalidSuiteNumber": "false",
+                    "ResolutionInput": "RAW_ADDRESS",
+                    "DPV": "true",
+                    "ResolutionMethod": "USPS_VALIDATE",
+                    "DataVintage": "December 2023",
+                    "MatchSource": "Postal",
+                    "CountrySupported": "true",
+                    "ValidlyFormed": "true",
+                    "Matched": "true",
+                    "Resolved": "true",
+                    "Inserted": "false",
+                    "MultiUnitBase": "false",
+                    "ZIP11Match": "true",
+                    "ZIP4Match": "true",
+                    "UniqueZIP": "false",
+                    "StreetAddress": "false",
+                    "RRConversion": "false",
+                    "ValidMultiUnit": "false",
+                    "AddressType": "STANDARDIZED",
+                    "AddressPrecision": "STREET_ADDRESS",
+                    "MultipleMatches": "false"
+                }
+            }
+        ]
+    }
+}
+
+//fail
+{
+    "transactionId": "acf3b492-bfca-4b40-907b-d649886a1742",
+    "output": {
+        "resolvedAddresses": [
+            {
+                "streetLinesToken": [
+                    "INSTITUTO MEDICO DEL NORTE INC"
+                ],
+                "city": "VEGA BAJA",
+                "stateOrProvinceCode": "PR",
+                "postalCode": "693",
+                "countryCode": "US",
+                "classification": "UNKNOWN",
+                "ruralRouteHighwayContract": false,
+                "generalDelivery": false,
+                "customerMessages": [
+                    {
+                        "code": "STANDARDIZED.ADDRESS.NOTFOUND",
+                        "message": "Standardized address is not found."
+                    }
+                ],
+                "attributes": {
+                    "SuiteRequiredButMissing": "false",
+                    "PostalValidated": "false",
+                    "InvalidSuiteNumber": "false",
+                    "ZIP11Match": "false",
+                    "GeneralDelivery": "false",
+                    "DPV": "false",
+                    "DataVintage": "October 2025",
+                    "ZIP4Match": "false",
+                    "CityStateValidated": "true",
+                    "CountrySupported": "true",
+                    "ValidlyFormed": "false",
+                    "Matched": "false",
+                    "StreetValidated": "false",
+                    "MissingOrAmbiguousDirectional": "false",
+                    "Resolved": "false",
+                    "StreetRangeValidated": "false",
+                    "AddressType": "NORMALIZED",
+                    "Inserted": "false",
+                    "MultipleMatches": "false"
+                }
+            }
+        ]
+    }
+}
+
+//Invalid 
+{
+    "transactionId": "cd3a5ecf-865a-4f75-9dc9-b8fdf2b20855",
+    "output": {
+        "resolvedAddresses": [
+            {
+                "streetLinesToken": [
+                    "917 AVE TITO CASTRO"
+                ],
+                "city": "PONCE",
+                "stateOrProvinceCode": "PR",
+                "postalCode": "00716-4717",
+                "parsedPostalCode": {
+                    "base": "00716",
+                    "addOn": "4717",
+                    "deliveryPoint": "17"
+                },
+                "countryCode": "US",
+                "classification": "BUSINESS",
+                "ruralRouteHighwayContract": false,
+                "generalDelivery": false,
+                "customerMessages": [
+                    {
+                        "code": "INTERPOLATED.STREET.ADDRESS",
+                        "message": "Unable to confirm exact street number for the entered street name. The address falls within a valid range for the street name."
+                    }
+                ],
+                "standardizedStatusNameMatchSource": "Map",
+                "resolutionMethodName": "NAVTEQ_GEO_VALIDATE",
+                "attributes": {
+                    "POBox": "false",
+                    "Intersection": "false",
+                    "SuiteRequiredButMissing": "true",
+                    "InvalidSuiteNumber": "false",
+                    "ResolutionInput": "RAW_ADDRESS",
+                    "DPV": "false",
+                    "ResolutionMethod": "NAVTEQ_GEO_VALIDATE",
+                    "DataVintage": "January 2017",
+                    "MatchSource": "Map",
+                    "CountrySupported": "true",
+                    "ValidlyFormed": "true",
+                    "Matched": "true",
+                    "Resolved": "true",
+                    "Inserted": "false",
+                    "InterpolatedStreetAddress": "true",
+                    "MultiUnitBase": "false",
+                    "ZIP11Match": "true",
+                    "ZIP4Match": "true",
+                    "StreetRange": "false",
+                    "UniqueZIP": "false",
+                    "RRConversion": "false",
+                    "ValidMultiUnit": "false",
+                    "AddressType": "STANDARDIZED",
+                    "MultipleMatches": "false"
+                }
+            }
+        ]
+    }
+}

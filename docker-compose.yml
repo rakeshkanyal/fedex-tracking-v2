@@ -1,0 +1,7 @@
+services:
+  web:
+    image: fedex_tracker # build from Dockerfile, or use build: .
+    build: .
+    container_name: php_web
+    ports:
+      - "8080:80"

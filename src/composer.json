@@ -1,0 +1,9 @@
+{
+  "require": {
+    "phpoffice/phpspreadsheet": "^1.30",
+    "guzzlehttp/guzzle": "^7.8",
+    "setasign/fpdi": "^2.6",
+    "setasign/fpdf": "^1.8",
+    "smalot/pdfparser": "^2.7"
+  }
+}
